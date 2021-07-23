@@ -27,9 +27,7 @@ export interface IButtonProps {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function Button(props: IButtonProps) {
   return (
-    <button
-      css={{
-        backgroundColor: 'hotpink',
+    <button css={{ backgroundColor: 'hotpink',
         '&:hover': {
           color: 'lightgreen',
         },
