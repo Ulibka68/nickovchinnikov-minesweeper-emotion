@@ -31,6 +31,7 @@ module.exports = {
     return merge(config, {
       resolve: {
         alias: {
+          '@': path.resolve(__dirname, 'src'),
           "@emotion/core": getPackageDir("@emotion/react"),
           "@emotion/styled": getPackageDir("@emotion/styled"),
           "emotion-theming": getPackageDir("@emotion/react"),
