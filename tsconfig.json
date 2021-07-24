@@ -3,12 +3,17 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Basic Options */
-    "target": "es5",                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+    //    https://www.staging-typescript.org/tsconfig#target
+    "target": "ES5",                             /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+
+    //    CommonJS (default if target is ES3 or ES5),
     "module": "commonjs",                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
-    "lib": [
-      "es2019",
-      "DOM"
-    ],                                   /* Specify library files to be included in the compilation. */
+    "moduleResolution": "node",    /* Default:  module === AMD or UMD or System or ES6, then Classic    Otherwise Node*/
+
+
+    //    https://www.staging-typescript.org/tsconfig#lib
+    "lib": ["dom", "dom.iterable", "esnext"], /* Specify library files to be included in the compilation. */
+
     "jsx": "preserve",                           /* Specify JSX code generation: 'preserve', 'react-native', 'react', 'react-jsx' or 'react-jsxdev'. */
     "strict": true,                                 /* Enable all strict type-checking options. */
     "baseUrl": "./",                             /* Base directory to resolve non-absolute module names. */
@@ -19,6 +24,30 @@
     },                                 /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "esModuleInterop": true,                        /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
-    "forceConsistentCasingInFileNames": true        /* Disallow inconsistently-cased references to the same file. */
+    "forceConsistentCasingInFileNames": true,        /* Disallow inconsistently-cased references to the same file. */
+
+
+    "allowJs": true,                          /* Allow JavaScript files to be imported inside your project */
+    "allowSyntheticDefaultImports": true,     /*allows you to write an import like:     import React from "react";     instead of:     import * as React from "react";*/
+    "isolatedModules": true,       /* если я правильно понял - не экспортировоать типы для js*/
+
+
+    /*
+      Do not emit compiler output files like JavaScript source code, source-maps or declarations.
+      This makes room for another tool like Babel, or swc to handle converting the TypeScript file to a file which can run inside a JavaScript environment.
+      You can then use TypeScript as a tool for providing editor integration, and as a source code type-checker.,
+
+      Default: false,
+    */
+//    "noEmit": true,
+
+    /*Report errors for fallthrough cases in switch statements. Ensures that any non-empty case inside a switch statement includes either break or return.
+    This means you won’t accidentally ship a case fallthrough bug.*/
+    "noFallthroughCasesInSwitch": true,
+
+    /*Allows importing modules with a ‘.json’ extension, which is a common practice in node projects.
+    This includes generating a type for the import based on the static JSON shape.
+    TypeScript does not support resolving JSON files by default:*/
+    "resolveJsonModule": true
   }
 }
