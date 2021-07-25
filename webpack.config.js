@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Storybook не воспринимает конфигурации в виде функции
 module.exports = {
   entry: './src/index.tsx',
   output: {
