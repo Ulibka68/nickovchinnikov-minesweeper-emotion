@@ -10,6 +10,7 @@
     "storybook": "start-storybook -p 6006",
     "start": "webpack serve --mode=development",
     "clear": "rimraf ./node_modules",
+    "clear:cache": "rimraf ./node_modules/.cache",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "watch": "webpack --watch --mode=development",
