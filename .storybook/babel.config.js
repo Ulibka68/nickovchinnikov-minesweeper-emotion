@@ -19,5 +19,11 @@ module.exports = {
         cssPropOptimization: true,
       },
     ],
+    [
+      '@babel/plugin-transform-typescript',
+      {
+        isTSX: true, // Forcibly enables jsx parsing. Otherwise angle brackets will be treated as TypeScript's legacy type assertion
+      },
+    ],
   ],
 };
