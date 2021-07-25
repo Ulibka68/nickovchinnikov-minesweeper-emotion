@@ -29,8 +29,31 @@
 
     "allowJs": true,                          /* Allow JavaScript files to be imported inside your project */
     "allowSyntheticDefaultImports": true,     /*allows you to write an import like:     import React from "react";     instead of:     import * as React from "react";*/
+
+    // Ensure that Babel can safely transpile files in the TypeScript project
     "isolatedModules": true,       /* если я правильно понял - не экспортировоать типы для js*/
 
+
+    /*
+      The downside to using babel is that you don’t get type checking during the transition from TS to JS.
+      This can mean that type errors which you miss in your editor could sneak through into production code.
+      */
+
+    /*
+    https://www.typescriptlang.org/docs/handbook/babel-with-typescript.html
+    Ensure that .d.ts files are created by tsc, but not .js files
+    Generate .d.ts files for every TypeScript or JavaScript file inside your project.
+    These .d.ts files are type definition files which describe the external API of your module.
+    With .d.ts files, tools like TypeScript can provide intellisense and accurate types for un-typed code.*/
+    //    "declaration": true,
+
+    /*
+    Only emit .d.ts files; do not emit .js files.
+    This setting is useful in two cases:
+    You are using a transpiler other than TypeScript to generate your JavaScript.
+    You are using TypeScript to only generate d.ts files for your consumers.
+    */
+    //    "emitDeclarationOnly": true,
 
     /*
       Do not emit compiler output files like JavaScript source code, source-maps or declarations.
@@ -39,7 +62,7 @@
 
       Default: false,
     */
-//    "noEmit": true,
+    //    "noEmit": true,
 
     /*Report errors for fallthrough cases in switch statements. Ensures that any non-empty case inside a switch statement includes either break or return.
     This means you won’t accidentally ship a case fallthrough bug.*/
@@ -48,6 +71,9 @@
     /*Allows importing modules with a ‘.json’ extension, which is a common practice in node projects.
     This includes generating a type for the import based on the static JSON shape.
     TypeScript does not support resolving JSON files by default:*/
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    //    декораторы
+    //    emitDecoratorMetadata и experimentalDecorators
   }
 }
