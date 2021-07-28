@@ -1,3 +1,5 @@
+# Если использовать как boilerplate - удали formik
+
 # Minesweeper
 author: Nikita Ovchinnikov
 

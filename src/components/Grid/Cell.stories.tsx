@@ -17,6 +17,7 @@ export const CellClosed = Template.bind({});
 CellClosed.args = {
   children: 10,
 };
+CellClosed.parameters = { pseudo: { hover: true } };
 
 export const CellIsEmpty = Template.bind({});
 CellIsEmpty.args = {
