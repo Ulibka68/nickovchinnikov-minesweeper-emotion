@@ -1,4 +1,6 @@
-import { keyframes, styled } from '@storybook/theming';
+import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
+// import { keyframes, styled } from '@storybook/theming';
+import styled from '@emotion/styled';
 import {
   ErrorMessage,
   Field as FormikInput,
@@ -6,7 +8,6 @@ import {
   Formik,
   FormikProps,
 } from 'formik';
-import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
 import { Icons, WithTooltip } from '@storybook/components';
 
 const errorMap = {
@@ -423,13 +424,13 @@ export const AccountForm: FC<AccountFormProps> = ({
 };
 
 const Wrapper = styled.section(({ theme }) => ({
-  fontFamily: theme.typography.fonts.base,
+  // fontFamily: theme.typography.fonts.base,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   width: 450,
   padding: 32,
-  backgroundColor: theme.background.content,
+  // backgroundColor: theme.background.content,
   borderRadius: 7,
 }));
 
@@ -446,7 +447,7 @@ const Title = styled.svg({
   position: 'relative',
 });
 
-const logoAnimation = keyframes({
+/*const logoAnimation = keyframes({
   '0': {
     transform: 'rotateY(0deg)',
     transformOrigin: '50% 5% 0',
@@ -455,17 +456,19 @@ const logoAnimation = keyframes({
     transform: 'rotateY(360deg)',
     transformOrigin: '50% 5% 0',
   },
-});
+});*/
 
 interface LogoProps {
   transacting: boolean;
 }
 
 const Logo = styled.svg<LogoProps>(
+  /*
   ({ transacting }) =>
     transacting && {
       animation: `${logoAnimation} 1250ms both infinite`,
     },
+*/
   { height: 40, zIndex: 10, marginLeft: 32 }
 );
 
@@ -510,7 +513,7 @@ const Label = styled.label({
 
 const Input = styled.input(({ theme }) => ({
   fontSize: 14,
-  color: theme.color.defaultText,
+  // color: theme.color.defaultText,
   padding: '10px 15px',
   borderRadius: 4,
   appearance: 'none',
@@ -545,7 +548,7 @@ const ErrorIcon = styled(Icons)(({ theme }) => ({
 }));
 
 const ErrorTooltip = styled.div(({ theme }) => ({
-  fontFamily: theme.typography.fonts.base,
+  // fontFamily: theme.typography.fonts.base,
   fontSize: 13,
   padding: 8,
   maxWidth: 350,
@@ -591,8 +594,8 @@ const Button = styled.button<ButtonProps>({
 
 const Submit = styled(Button)(({ theme, dirty }) => ({
   marginRight: 8,
-  backgroundColor: theme.color.secondary,
-  color: theme.color.inverseText,
+  // backgroundColor: theme.color.secondary,
+  // color: theme.color.inverseText,
   opacity: dirty ? 1 : 0.6,
   boxShadow: 'rgb(30 167 253 / 10%) 0 0 0 1px inset',
 }));
@@ -600,5 +603,5 @@ const Submit = styled(Button)(({ theme, dirty }) => ({
 const Reset = styled(Button)(({ theme }) => ({
   marginLeft: 8,
   boxShadow: 'rgb(30 167 253) 0 0 0 1px inset',
-  color: theme.color.secondary,
+  // color: theme.color.secondary,
 }));
