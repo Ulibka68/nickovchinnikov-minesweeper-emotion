@@ -15,11 +15,17 @@ export default {
 // export const Standard = (args: AccountFormProps) => <AccountForm {...args} />;
 // Standard.args = { passwordVerification: false };
 
+/*
 export const Standard: ComponentStory<typeof AccountForm> = {
   // render: (args: AccountFormProps) => <AccountForm {...args} />,
   args: { passwordVerification: false },
 };
-/*
+*/
+
+export const Standard: ComponentStory<typeof AccountForm> = (args) => (
+  <AccountForm {...args} />
+);
+Standard.args = { passwordVerification: false };
 
 export const StandardEmailFilled = {
   ...Standard,
@@ -60,14 +66,21 @@ export const StandardFailHover = {
     await userEvent.type(screen.getByTestId('password1'), 'asdf');
     await userEvent.click(screen.getByTestId('submit'));
 
-    await sleep(1500);
-    await userEvent.hover(screen.getByTestId('password-error-info'));
+    // await sleep(100);
+    // await userEvent.hover(screen.getByTestId('password-error-info'));
   },
 };
 
+/*
 export const Verification: ComponentStory<typeof AccountForm> = {
   args: { passwordVerification: true },
 };
+*/
+
+export const Verification: ComponentStory<typeof AccountForm> = (args) => (
+  <AccountForm {...args} />
+);
+Verification.args = { passwordVerification: true };
 
 export const VerificationPasssword1 = {
   ...Verification,
@@ -106,4 +119,3 @@ export const VerificationSuccess = {
     await userEvent.click(screen.getByTestId('submit'));
   },
 };
-*/

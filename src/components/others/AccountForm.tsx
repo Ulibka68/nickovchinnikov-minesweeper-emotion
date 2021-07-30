@@ -540,7 +540,7 @@ const ErrorWrapper = styled.div({
 });
 
 const ErrorIcon = styled(Icons)(({ theme }) => ({
-  fill: theme.color.defaultText,
+  // fill: theme.color.defaultText,
   opacity: 0.8,
   marginRight: 6,
   marginLeft: 2,
