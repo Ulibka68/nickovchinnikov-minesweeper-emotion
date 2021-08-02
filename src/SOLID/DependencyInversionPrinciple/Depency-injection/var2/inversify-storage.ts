@@ -1,3 +1,8 @@
+import { injectable, inject, Container } from 'inversify';
+import 'reflect-metadata';
+
+let container: Container;
+
 class Person {
   FirstName = '';
   LastName = '';
@@ -17,6 +22,7 @@ export interface IFindStorage {
   Add: (p: Person) => void;
 }
 
+@injectable()
 class ListStorage implements IFindStorage {
   private storage: Array<Person> = [];
 
@@ -40,29 +46,8 @@ class ListStorage implements IFindStorage {
   }
 }
 
-class SearchByAge {
-  storage: IFindStorage;
-  constructor(pStorage: IFindStorage) {
-    this.storage = pStorage;
-  }
-
-  Search(age: number) {
-    return this.storage.FindAll((e) => e.Age > age);
-  }
-}
-class SearchByFirstName {
-  storage: IFindStorage;
-  constructor(pStorage: IFindStorage) {
-    this.storage = pStorage;
-  }
-
-  Search(name: string) {
-    return this.storage.FindAll((e) => e.FirstName.includes(name));
-  }
-}
-
-// class DictionaryStorage implements IFindStorage {
-class DictionaryStorage {
+@injectable()
+class MapStorage implements IFindStorage {
   private curIndex = 0;
   private storage = new Map<number, Person>();
 
@@ -90,22 +75,63 @@ class DictionaryStorage {
   }
 }
 
+@injectable()
+class SearchByAge {
+  constructor(@inject('storage') private storage: IFindStorage) {}
+
+  Search(age: number) {
+    return this.storage.FindAll((e) => e.Age > age);
+  }
+}
+
+@injectable()
+class SearchByFirstName {
+  constructor(@inject('storage') private storage: IFindStorage) {}
+
+  Search(name: string) {
+    return this.storage.FindAll((e) => e.FirstName.includes(name));
+  }
+}
+
+function bindings() {
+  container = new Container();
+  /*container
+    .bind<IFindStorage>('storage')
+    .to(ListStorage)
+    .whenTargetNamed('storageList');*/
+
+  container.bind<IFindStorage>('storage').to(ListStorage);
+  /* container
+    .bind<IFindStorage>('storage')
+    .to(MapStorage)
+    .whenTargetNamed('storageMap');*/
+  container.bind<SearchByFirstName>('SearchByFirstName').to(SearchByFirstName);
+  container.bind<SearchByAge>('SearchByAge').to(SearchByAge);
+}
+
 function main() {
-  const d = new DictionaryStorage();
+  bindings();
+
   function predicate(p: Person) {
     return p.Age > 40;
   }
 
+  const d = container.get<IFindStorage>('storage');
+  // const d = container.getNamed<IFindStorage>('storage', 'storageList');
+
+  const s = container.get<SearchByFirstName>('SearchByFirstName');
+  // const d = new MapStorage();
+
   console.log('DictionaryStorage');
   console.log(d.FindAll(predicate));
   console.log('==================');
-  console.log(new SearchByFirstName(d).Search('2'));
+  // console.log(new SearchByFirstName(d).Search('2'));
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  /*console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
   console.log('ListStorage');
   const l = new ListStorage();
   console.log(l.FindAll(predicate));
   console.log('==================');
-  console.log(new SearchByAge(l).Search(50));
+  console.log(new SearchByAge(l).Search(50));*/
 }
 main();

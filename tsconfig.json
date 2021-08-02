@@ -76,5 +76,7 @@
 
     //    декораторы
     //    emitDecoratorMetadata и experimentalDecorators
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
