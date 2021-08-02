@@ -95,16 +95,14 @@ class SearchByFirstName {
 
 function bindings() {
   container = new Container();
-  /*container
-    .bind<IFindStorage>('storage')
-    .to(ListStorage)
-    .whenTargetNamed('storageList');*/
 
-  container.bind<IFindStorage>('storage').to(ListStorage);
-  /* container
+  container
     .bind<IFindStorage>('storage')
     .to(MapStorage)
-    .whenTargetNamed('storageMap');*/
+    .whenTargetNamed('maptag');
+
+  container.bind<IFindStorage>('storage').to(ListStorage).whenTargetIsDefault();
+
   container.bind<SearchByFirstName>('SearchByFirstName').to(SearchByFirstName);
   container.bind<SearchByAge>('SearchByAge').to(SearchByAge);
 }
@@ -116,22 +114,20 @@ function main() {
     return p.Age > 40;
   }
 
-  const d = container.get<IFindStorage>('storage');
-  // const d = container.getNamed<IFindStorage>('storage', 'storageList');
+  const d = container.getNamed<IFindStorage>('storage', 'maptag');
 
   const s = container.get<SearchByFirstName>('SearchByFirstName');
-  // const d = new MapStorage();
 
   console.log('DictionaryStorage');
   console.log(d.FindAll(predicate));
   console.log('==================');
-  // console.log(new SearchByFirstName(d).Search('2'));
+  console.log(new SearchByFirstName(d).Search('2'));
 
-  /*console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
   console.log('ListStorage');
-  const l = new ListStorage();
+  const l = container.get<IFindStorage>('storage');
   console.log(l.FindAll(predicate));
   console.log('==================');
-  console.log(new SearchByAge(l).Search(50));*/
+  console.log(new SearchByAge(l).Search(50));
 }
 main();
